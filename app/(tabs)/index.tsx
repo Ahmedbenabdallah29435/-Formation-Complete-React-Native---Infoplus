@@ -1,5 +1,5 @@
-import ProfileCardTest from '@/components/ProfileCard';
-import ProfileCard from '@/components/ProfileCardTest';
+import ProfileCard from '@/components/ProfileCard';
+import ProfileCardTest from '@/components/ProfileCardTest';
 import { useState } from 'react';
 import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 export default function HomeScreen() {
@@ -36,12 +36,12 @@ export default function HomeScreen() {
         <Text style={styles.headerTitle}>Mon Profil</Text>
         <Button title={dark ? ' Mode Clair' : ' Mode Sombre'} onPress={() => setDark(!dark)} />
       </View>
-      <ProfileCardTest
+      <ProfileCard
         nom="Ahmed Ben Salah"
         bio="Étudiant en développement mobile"
         photo={require('@/assets/images/123.png')}
       />
-      <ProfileCard description="Étudiant en développement mobile passionné par la création d'applications innovantes et performantes. Compétent en React Native, TypeScript, et JavaScript, avec une solide expérience en HTML/CSS et Git. Toujours à la recherche de nouveaux défis pour améliorer mes compétences et contribuer à des projets passionnants." />
+      <ProfileCardTest description="Étudiant en développement mobile passionné par la création d'applications innovantes et performantes. Compétent en React Native, TypeScript, et JavaScript, avec une solide expérience en HTML/CSS et Git. Toujours à la recherche de nouveaux défis pour améliorer mes compétences et contribuer à des projets passionnants." />
       <View
         style={[
           styles.section,

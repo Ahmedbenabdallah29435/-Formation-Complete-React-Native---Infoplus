@@ -30,15 +30,21 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   avatar: {
-    width: 100, height: 100,
-    borderRadius: 50, marginBottom: 12,
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    marginBottom: 12,
   },
   name: {
-    fontSize: 24, fontWeight: 'bold', color: '#0D47A1',
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#0D47A1',
   },
   bio: {
-    fontSize: 14, color: '#666',
-    marginTop: 4, textAlign: 'center',
+    fontSize: 14,
+    color: '#666',
+    marginTop: 4,
+    textAlign: 'center',
   },
 });
 
