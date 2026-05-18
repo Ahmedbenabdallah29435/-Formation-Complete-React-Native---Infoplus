@@ -1,46 +1,45 @@
 import { StyleSheet, Text, View } from 'react-native';
+
 type ProfileProps = {
   title?: string;
   description: string;
+  dark?: boolean;
 };
-const ProfileCard = ({ title, description }: ProfileProps) => {
+
+const ProfileCardTest = ({ title, description, dark = false }: ProfileProps) => {
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
+    <View style={[styles.card, { backgroundColor: dark ? '#2A3047' : '#ffffff' }]}>
+      {title ? (
+        <Text style={[styles.title, { color: dark ? '#90CAF9' : '#0D47A1' }]}>{title}</Text>
+      ) : null}
+      <Text style={[styles.description, { color: dark ? '#B0B8D0' : '#666' }]}>{description}</Text>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ffffff',
     borderRadius: 16,
     padding: 24,
     alignItems: 'center',
-    margin: 16,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-
-    shadowOpacity: 0.1,
+    marginHorizontal: 16,
+    marginTop: 16,
+    shadowColor: '#0D47A1',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
     shadowRadius: 8,
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 12,
+    elevation: 4,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#0D47A1',
+    marginBottom: 6,
   },
   description: {
     fontSize: 14,
-    color: '#666',
-    marginTop: 4,
     textAlign: 'center',
+    lineHeight: 20,
   },
 });
-export default ProfileCard;
+
+export default ProfileCardTest;

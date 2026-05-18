@@ -6,7 +6,8 @@
     "duree": "3 mois",
     "niveau": "Intermédiaire",
     "prix": "850 DT",
-    "prerequis": "Bases en JavaScript et HTML/CSS"
+    "prerequis": "Bases en JavaScript et HTML/CSS",
+    "image": "https://images.unsplash.com/photo-1592434134753-a70baf7979d5?w=800"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "duree": "3 mois",
     "niveau": "Intermédiaire",
     "prix": "800 DT",
-    "prerequis": "Bases en programmation orientée objet"
+    "prerequis": "Bases en programmation orientée objet",
+    "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "duree": "4 mois",
     "niveau": "Débutant",
     "prix": "950 DT",
-    "prerequis": "Aucun"
+    "prerequis": "Aucun",
+    "image": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "duree": "2 mois",
     "niveau": "Débutant",
     "prix": "700 DT",
-    "prerequis": "HTML, CSS, JavaScript"
+    "prerequis": "HTML, CSS, JavaScript",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800"
   },
   {
     "id": 5,
@@ -42,6 +46,7 @@
     "duree": "2 mois",
     "niveau": "Avancé",
     "prix": "750 DT",
-    "prerequis": "JavaScript intermédiaire"
+    "prerequis": "JavaScript intermédiaire",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800"
   }
 ]

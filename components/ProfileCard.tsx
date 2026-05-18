@@ -4,30 +4,31 @@ type ProfileProps = {
   nom: string;
   bio: string;
   photo: ImageSourcePropType;
+  dark?: boolean;
 };
 
-const ProfileCard = ({ nom, bio, photo }: ProfileProps) => {
+const ProfileCard = ({ nom, bio, photo, dark = false }: ProfileProps) => {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, { backgroundColor: dark ? '#2A3047' : '#ffffff' }]}>
       <Image source={photo} style={styles.avatar} />
-      <Text style={styles.name}>{nom}</Text>
-      <Text style={styles.bio}>{bio}</Text>
+      <Text style={[styles.name, { color: dark ? '#90CAF9' : '#0D47A1' }]}>{nom}</Text>
+      <Text style={[styles.bio, { color: dark ? '#B0B8D0' : '#666' }]}>{bio}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ffffff',
     borderRadius: 16,
     padding: 24,
     alignItems: 'center',
-    margin: 16,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    marginHorizontal: 16,
+    marginTop: 16,
+    shadowColor: '#0D47A1',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
     shadowRadius: 8,
+    elevation: 4,
   },
   avatar: {
     width: 100,
@@ -38,11 +39,9 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#0D47A1',
   },
   bio: {
     fontSize: 14,
-    color: '#666',
     marginTop: 4,
     textAlign: 'center',
   },
