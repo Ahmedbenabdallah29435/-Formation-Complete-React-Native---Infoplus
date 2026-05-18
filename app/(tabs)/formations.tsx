@@ -1,75 +1,141 @@
-import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
-
+import formationsData from '@/data/formations.json';
 import { useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+
 type Formation = {
   id: number;
   title: string;
-  body: string;
+  description: string;
+  duree: string;
+  niveau: string;
+  prix: string;
+  prerequis: string;
 };
+
 export default function FormationsScreen() {
-  const [formations, setFormations] = useState<Formation[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((res) => res.json())
-      .then((data) => setFormations(data.slice(0, 10)))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
-  if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color="#0D47A1" />
-        <Text style={styles.loadingText}>Chargement...</Text>
-      </View>
-    );
-  }
-  if (error) {
-    return (
-      <View style={styles.center}>
-        <Text style={styles.errorText}>Erreur : {error}</Text>
-      </View>
-    );
-  }
+  const [formations, setFormations] = useState<Formation[]>(formationsData);
+  const [search, setSearch] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setFormations([...formationsData].sort(() => Math.random() - 0.5));
+      setRefreshing(false);
+    }, 1000);
+  };
+
+  const filtered = formations.filter((f) =>
+    f.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <FlatList
-      data={formations}
-      keyExtractor={(item) => item.id.toString()}
-      contentContainerStyle={styles.list}
-      renderItem={({ item }) => (
-        <Pressable
-          style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
-          onPress={() => router.push(`/formation/${item.id}`)}
-        >
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.body} numberOfLines={2}>
-            {item.body}
-          </Text>
-        </Pressable>
-      )}
-    />
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Nos Formations</Text>
+        <Text style={styles.subtitle}>Choisis ta voie chez InfoPlus</Text>
+      </View>
+
+      <View style={styles.searchWrap}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="🔍 Rechercher une formation..."
+          placeholderTextColor="#999"
+          value={search}
+          onChangeText={setSearch}
+        />
+      </View>
+
+      <FlatList
+        data={filtered}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.list}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        ListEmptyComponent={
+          <Text style={styles.empty}>Aucune formation trouvée.</Text>
+        }
+        renderItem={({ item }) => (
+          <Pressable
+            style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
+            onPress={() => router.push(`/formation/${item.id}`)}
+          >
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <Text style={styles.cardText} numberOfLines={2}>
+              {item.description}
+            </Text>
+            <View style={styles.metaRow}>
+              <Text style={styles.metaBadge}>⏱ {item.duree}</Text>
+              <Text style={styles.metaBadge}>📊 {item.niveau}</Text>
+              <Text style={styles.metaBadge}>💰 {item.prix}</Text>
+            </View>
+          </Pressable>
+        )}
+      />
+    </View>
   );
 }
+
 const styles = StyleSheet.create({
-  list: { padding: 16 },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  loadingText: { marginTop: 12, color: '#666' },
-  errorText: { color: '#E53935', fontSize: 16 },
-  card: {
+  container: { flex: 1, backgroundColor: '#f0f4f8' },
+  header: {
+    backgroundColor: '#0D47A1',
+    padding: 40,
+    alignItems: 'center',
+    paddingTop: 60,
+  },
+  title: { fontSize: 32, fontWeight: 'bold', color: '#ffffff' },
+  subtitle: { fontSize: 16, color: '#90CAF9', marginTop: 4 },
+  searchWrap: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+  },
+  searchInput: {
     backgroundColor: '#fff',
-    padding: 16,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    fontSize: 15,
+    elevation: 2,
+  },
+  list: { padding: 16, paddingBottom: 24 },
+  card: {
+    backgroundColor: '#ffffff',
+    padding: 20,
     borderRadius: 12,
     marginBottom: 12,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    elevation: 3,
   },
   cardPressed: { opacity: 0.7, transform: [{ scale: 0.98 }] },
-  title: { fontSize: 16, fontWeight: 'bold', color: '#0D47A1', marginBottom: 4 },
-  body: { fontSize: 13, color: '#666' },
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0D47A1',
+    marginBottom: 8,
+  },
+  cardText: { fontSize: 15, color: '#333', lineHeight: 22 },
+  metaRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 12,
+  },
+  metaBadge: {
+    backgroundColor: '#E3F2FD',
+    color: '#0D47A1',
+    fontSize: 13,
+    fontWeight: '600',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  empty: {
+    textAlign: 'center',
+    color: '#666',
+    marginTop: 32,
+    fontSize: 15,
+  },
 });

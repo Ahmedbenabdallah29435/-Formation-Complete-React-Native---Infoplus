@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "React Native — Développement Mobile",
+    "description": "Apprends à créer des applications mobiles iOS et Android avec React Native, Expo et TypeScript.",
+    "duree": "3 mois",
+    "niveau": "Intermédiaire",
+    "prix": "850 DT",
+    "prerequis": "Bases en JavaScript et HTML/CSS"
+  },
+  {
+    "id": 2,
+    "title": "Flutter — Cross-Platform",
+    "description": "Maîtrise Dart et Flutter pour développer des apps multiplateformes performantes et élégantes.",
+    "duree": "3 mois",
+    "niveau": "Intermédiaire",
+    "prix": "800 DT",
+    "prerequis": "Bases en programmation orientée objet"
+  },
+  {
+    "id": 3,
+    "title": "Python — Data & IA",
+    "description": "De zéro à confirmé : syntaxe Python, bibliothèques scientifiques, machine learning et IA.",
+    "duree": "4 mois",
+    "niveau": "Débutant",
+    "prix": "950 DT",
+    "prerequis": "Aucun"
+  },
+  {
+    "id": 4,
+    "title": "React JS — Développement Web",
+    "description": "Construis des interfaces web modernes et réactives avec React, hooks et Next.js.",
+    "duree": "2 mois",
+    "niveau": "Débutant",
+    "prix": "700 DT",
+    "prerequis": "HTML, CSS, JavaScript"
+  },
+  {
+    "id": 5,
+    "title": "Node.js & Express — Backend",
+    "description": "Crée des API REST robustes avec Node.js, Express, MongoDB et JWT pour l'authentification.",
+    "duree": "2 mois",
+    "niveau": "Avancé",
+    "prix": "750 DT",
+    "prerequis": "JavaScript intermédiaire"
+  }
+]

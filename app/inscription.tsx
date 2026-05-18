@@ -1,7 +1,8 @@
-import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput } from 'react-native';
-
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
+import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 export default function InscriptionScreen() {
   const { formationId } = useLocalSearchParams<{ formationId: string }>();
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function InscriptionScreen() {
       Alert.alert('Erreur', 'Le nom doit contenir au moins 2 caractères');
       return;
     }
-    if (!email.includes('@') || !email.includes('.')) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       Alert.alert('Erreur', 'Email invalide');
       return;
     }
@@ -21,14 +22,13 @@ export default function InscriptionScreen() {
       Alert.alert('Erreur', 'Numéro de téléphone invalide');
       return;
     }
-    // Tout est OK -> aller vers confirmation
     router.push({
       pathname: '/confirmation',
       params: { nom, email, formationId },
     });
   };
   return (
-    <>
+    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <Stack.Screen options={{ title: 'Inscription' }} />
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Inscription Formation #{formationId}</Text>
@@ -68,10 +68,11 @@ export default function InscriptionScreen() {
           <Text style={styles.btnSecondaryText}>Annuler</Text>
         </Pressable>
       </ScrollView>
-    </>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
+  safe: { flex: 1, backgroundColor: '#F0F4F8' },
   container: { padding: 20, backgroundColor: '#F0F4F8', flexGrow: 1 },
   title: { fontSize: 22, fontWeight: 'bold', color: '#0D47A1', marginBottom: 4 },
   subtitle: { fontSize: 13, color: '#666', marginBottom: 24 },

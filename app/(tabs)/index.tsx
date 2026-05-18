@@ -1,141 +1,63 @@
-import ProfileCard from '@/components/ProfileCard';
-import ProfileCardTest from '@/components/ProfileCardTest';
-import { useState } from 'react';
-import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-export default function HomeScreen() {
-  const [dark, setDark] = useState(false);
-  const bg = dark ? '#1A1F36' : '#F0F4F8';
-  const textColor = dark ? '#FFFFFF' : '#333333';
-  const colors = ['#0D47A1', '#1976D2', '#1565C0', '#0277BD'];
-  const [competences, setCompetences] = useState([
-    'React Native',
-    'TypeScript',
-    'JavaScript',
-    'HTML/CSS',
-    'Git & GitHub',
-    'Gitlab',
-    'CI/CD',
-    'Agile Methodologies',
-    'UI/UX Design',
-    'Testing & Debugging',
-  ]);
-  const [newSkill, setNewSkill] = useState('');
-  const addSkill = () => {
-    if (newSkill.trim() === '') return; // évite les vides
-    if (competences.includes(newSkill)) return; // évite les doublons
+import { Image } from 'expo-image';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-    setCompetences([...competences, newSkill]);
-    setNewSkill(''); // vide le champ
-  };
-  const removeSkill = (skill: string) => {
-    setCompetences(competences.filter((c) => c !== skill));
-  };
+export default function HomeScreen() {
   return (
-    <ScrollView style={[styles.container, { backgroundColor: bg }]}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Mon Profil</Text>
-        <Button title={dark ? ' Mode Clair' : ' Mode Sombre'} onPress={() => setDark(!dark)} />
+        <Image source={require('@/assets/images/123.png')} style={styles.logo} />
+        <Text style={styles.title}>InfoPlus</Text>
+        <Text style={styles.subtitle}>Centre de Formation — Bizerte</Text>
       </View>
-      <ProfileCard
-        nom="Ahmed Ben Salah"
-        bio="Étudiant en développement mobile"
-        photo={require('@/assets/images/123.png')}
-      />
-      <ProfileCardTest description="Étudiant en développement mobile passionné par la création d'applications innovantes et performantes. Compétent en React Native, TypeScript, et JavaScript, avec une solide expérience en HTML/CSS et Git. Toujours à la recherche de nouveaux défis pour améliorer mes compétences et contribuer à des projets passionnants." />
-      <View
-        style={[
-          styles.section,
-          { backgroundColor: dark ? '#2A3047' : '#fff' }, // ← fond qui suit le thème
-        ]}
-      >
-        <Text style={[styles.sectionTitle, { color: textColor }]}>Mes Compétences</Text>
-        <View style={styles.inputRow}>
-          <TextInput
-            style={styles.input}
-            placeholder="Nouvelle compétence..."
-            placeholderTextColor="#999"
-            value={newSkill}
-            onChangeText={setNewSkill}
-            onSubmitEditing={addSkill}
-          />
-          <Button title="Ajouter" onPress={addSkill} />
-        </View>
-        <View style={styles.skillsContainer}>
-          {competences.map((comp, index) => (
-            <Pressable
-              key={comp}
-              onPress={() => removeSkill(comp)}
-              style={[styles.skillBadge, { backgroundColor: colors[index % colors.length] }]}
-            >
-              <Text style={styles.skillText}>{comp} ✕</Text>
-            </Pressable>
-          ))}
-        </View>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>📚 Qui sommes-nous ?</Text>
+        <Text style={styles.cardText}>
+          InfoPlus est un centre de formation spécialisé dans les technologies du web et du mobile.
+        </Text>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>🎓 Nos Formations</Text>
+        <Text style={styles.cardText}>• React Native — Dév Mobile</Text>
+        <Text style={styles.cardText}>• React JS — Dév Web</Text>
+        <Text style={styles.cardText}>• Flutter — Cross-Platform</Text>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>📍 Contact</Text>
+        <Text style={styles.cardText}>Bizerte, Tunisie</Text>
+        <Text style={styles.cardText}>📞 +216 72 435 403</Text>
       </View>
     </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: '#f0f4f8' },
   header: {
     backgroundColor: '#0D47A1',
-    padding: 20,
+    padding: 40,
+    alignItems: 'center',
     paddingTop: 60,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  section: {
-    padding: 16,
-    margin: 16,
-    backgroundColor: '#fff',
-    borderRadius: 12,
-
-    elevation: 3, // pour Android
-  },
-  skillsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: 8, // espace entre badges (RN 0.71+)
-  },
-  inputRow: {
-    flexDirection: 'row',
-    gap: 8,
-    marginBottom: 16,
-    width: '100%',
-    alignItems: 'center',
-  },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    fontSize: 14,
-    backgroundColor: '#fff',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  logo: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     marginBottom: 12,
   },
-  skillBadge: {
-    backgroundColor: '#0D47A1',
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
-    // alignSelf: 'flex-start',
+  title: { fontSize: 32, fontWeight: 'bold', color: '#ffffff' },
+  subtitle: { fontSize: 16, color: '#90CAF9', marginTop: 4 },
+  card: {
+    backgroundColor: '#ffffff',
+    margin: 16,
+    padding: 20,
+    borderRadius: 12,
+    elevation: 3,
   },
-  skillText: {
-    color: '#fff',
-    fontSize: 13,
-    fontWeight: '600',
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0D47A1',
+    marginBottom: 8,
   },
+  cardText: { fontSize: 15, color: '#333', lineHeight: 24 },
 });
