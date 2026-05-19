@@ -59,6 +59,18 @@ The app covers the typical features of a training-center app: catalog of formati
 
 ---
 
+## 🚀 Try it live
+
+🌐 **Live demo** : [**infoplus-react-native-course.netlify.app**](https://infoplus-react-native-course.netlify.app)
+
+- 🖥️ On **desktop**: framed phone preview with animated background.
+- 📱 On **mobile** (phone browser): full-screen, mobile-app behavior.
+- 🔐 Create an account (signup is open, no email confirmation required) or log in to test the full flow.
+
+⚠️ The web demo lacks some native features (haptics, click sound disabled on web). For the full experience → scan the QR with Expo Go (see [Run the project](#️-run-the-project)).
+
+---
+
 ## 🛠 Tech stack
 
 - **Expo SDK 54** + **React Native 0.81** + **React 19**

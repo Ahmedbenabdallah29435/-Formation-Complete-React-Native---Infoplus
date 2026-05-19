@@ -61,6 +61,18 @@ animations d'entrée, onboarding, authentification Supabase, etc.
 
 ---
 
+## 🚀 Tester l'app en ligne
+
+🌐 **Démo en direct** : [**infoplus-react-native-course.netlify.app**](https://infoplus-react-native-course.netlify.app)
+
+- 🖥️ Sur **desktop** : affichage encadré façon téléphone avec fond animé.
+- 📱 Sur **mobile** (navigateur du téléphone) : plein écran, comportement d'app mobile.
+- 🔐 Crée un compte (l'inscription est ouverte, pas besoin de confirmer l'email) ou connecte-toi pour tester le flow complet.
+
+⚠️ La démo web n'a pas toutes les features natives (haptics, son désactivé sur web). Pour l'expérience complète → scan le QR avec Expo Go (voir [Lancer le projet](#️-lancer-le-projet)).
+
+---
+
 ## 🛠 Stack technique
 
 - **Expo SDK 54** + **React Native 0.81** + **React 19**
