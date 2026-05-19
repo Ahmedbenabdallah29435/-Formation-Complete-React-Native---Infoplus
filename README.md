@@ -34,20 +34,23 @@ animations d'entrée, onboarding, authentification Supabase, etc.
         <sub><b>📚 Formations</b><br/>Liste + recherche + pull-to-refresh</sub>
       </td>
       <td align="center">
-        <img src="docs/screenshots/Formation%20React%20Native%203.png" width="200" alt="Capture 3" /><br/>
-        <sub><b>🎓 Détail</b><br/>Image hero + infos + CTA</sub>
+        <img src="docs/screenshots/Formation%20React%20Native%204.png" width="200" alt="Capture 3" /><br/>
+        <sub><b>🎓 Information</b><br/>Image hero + infos + CTA</sub>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <img src="docs/screenshots/Formation%20React%20Native%204.png" width="200" alt="Capture 4" /><br/>
+        <img src="docs/screenshots/Formation%20React%20Native%203.png" width="200" alt="Capture 4" /><br/>
         <sub><b>👤 Profil</b><br/>Auth Supabase + compétences + dark mode</sub>
       </td>
       <td align="center">
         <img src="docs/screenshots/Formation%20React%20Native%205.png" width="200" alt="Capture 5" /><br/>
         <sub><b>🔐 Login / Signup</b><br/>Supabase Auth + session persistante</sub>
       </td>
-      <td></td>
+      <td align="center">
+        <img src="docs/screenshots/Formation%20React%20Native%206.png" width="200" alt="Capture 5" /><br/>
+<sub><b>🎓 Détail formation/b><br/>Image hero + infos + CTA</sub>
+      </td>
     </tr>
   </table>
 </div>
@@ -106,25 +109,30 @@ data/
 > parcours, utilise `git checkout <branche>`.
 
 ### 🌱 Atelier 1 & 2 — Bases de React Native + composants
+
 **Branche : [`ATELIER-1-2`](../../tree/ATELIER-1-2)**
 
 Fondations de l'app :
+
 - Installation de l'environnement **Expo** + premier `npx expo start`.
 - Composants RN de base : `View`, `Text`, `Image`, `ScrollView`, `Pressable`, `Button`.
 - **Props & TypeScript** : création de `ProfileCard` (photo, nom, bio) et `ProfileCardTest` (description).
 - **`StyleSheet.create`** : organisation des styles, `flex`, `flexDirection`, `justifyContent`.
-- Premier écran *Profil* avec photo, bio, et **liste des compétences** (badges colorés).
+- Premier écran _Profil_ avec photo, bio, et **liste des compétences** (badges colorés).
 - **`useState`** : ajouter / supprimer dynamiquement des compétences, toggle Mode Clair/Sombre local.
-- Premier écran *Explore / Accueil* présentant le centre InfoPlus.
+- Premier écran _Explore / Accueil_ présentant le centre InfoPlus.
 - Navigation par onglets (Tabs) via **Expo Router** (`app/(tabs)/_layout.tsx`).
 
 ### 🚀 Atelier 3 — Navigation, FlatList & API
+
 **Branches :**
+
 - [`ATELIER-3`](../../tree/ATELIER-3) — version de base
 - [`ATELIER-3-Version-Final`](../../tree/ATELIER-3-Version-Final) — version finale propre
 - [`Atelier-3-bonus`](../../tree/Atelier-3-bonus) — **avec les 5 mini-défis bonus**
 
 Ce qu'on a ajouté :
+
 - **Expo Router avancé** : routes dynamiques `app/formation/[id].tsx`, navigation par `router.push()`, paramètres avec `useLocalSearchParams()`.
 - **`FlatList`** avec `renderItem`, `keyExtractor`, `ListEmptyComponent`.
 - **`useEffect` + `fetch`** : chargement asynchrone depuis JSONPlaceholder puis migration vers un fichier local `data/formations.json`.
@@ -133,6 +141,7 @@ Ce qu'on a ajouté :
 - **`ActivityIndicator`** + gestion d'état de chargement + erreurs.
 
 **Mini-défis bonus (branche `Atelier-3-bonus`) :**
+
 1. 🔄 **Pull-to-refresh** sur la FlatList (`refreshing` + `onRefresh`).
 2. 🔍 **Barre de recherche** filtrant les formations par titre (`.filter()`).
 3. 📄 **Vraies données** dans `data/formations.json` (React Native, Flutter, Python, React JS, Node.js).
@@ -140,12 +149,14 @@ Ce qu'on a ajouté :
 5. ✉️ **Validation email regex** : `/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)`.
 
 ### ✨ Atelier 4 — Contexte global, animations & polish (EN COURS)
+
 **Branche : sera créée pour la correction**
 
 > Cet atelier sera travaillé maintenant — la branche correspondante sera
 > créée pour y placer la correction.
 
 Sujets visés :
+
 - **`React Context`** pour partager l'état entre écrans :
   - `ThemeContext` → mode sombre/clair appliqué sur **toutes** les pages.
   - `OnboardingContext` → contrôle global du tutorial (re-déclenchable).
@@ -176,6 +187,7 @@ npx expo start
 ```
 
 Puis :
+
 - 📱 Scanner le QR avec **Expo Go** (Android/iOS)
 - 🤖 `a` pour ouvrir sur émulateur Android
 - 🍎 `i` pour ouvrir sur simulateur iOS
@@ -189,16 +201,17 @@ status bar et la nav bar système overlay le contenu. Les composants utilisent
 
 ## 🔀 Branches Git
 
-| Branche | Contenu |
-| --- | --- |
-| `main` | Version actuelle (la plus à jour) |
-| `ATELIER-1-2` | Correction des ateliers 1 et 2 (bases + profil) |
-| `ATELIER-3` | Correction de l'atelier 3 (version de base) |
-| `ATELIER-3-Version-Final` | Atelier 3 — version finale propre |
-| `Atelier-3-bonus` | Atelier 3 + les 5 mini-défis bonus |
-| `Atelier-4` | Correction de l'atelier 4 (Supabase Auth + Context + bonus) |
+| Branche                   | Contenu                                                     |
+| ------------------------- | ----------------------------------------------------------- |
+| `main`                    | Version actuelle (la plus à jour)                           |
+| `ATELIER-1-2`             | Correction des ateliers 1 et 2 (bases + profil)             |
+| `ATELIER-3`               | Correction de l'atelier 3 (version de base)                 |
+| `ATELIER-3-Version-Final` | Atelier 3 — version finale propre                           |
+| `Atelier-3-bonus`         | Atelier 3 + les 5 mini-défis bonus                          |
+| `Atelier-4`               | Correction de l'atelier 4 (Supabase Auth + Context + bonus) |
 
 Pour consulter une correction :
+
 ```bash
 git checkout ATELIER-3-Version-Final
 # ou
