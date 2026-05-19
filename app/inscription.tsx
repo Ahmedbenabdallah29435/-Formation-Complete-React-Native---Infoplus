@@ -1,11 +1,11 @@
 import AppHeader from '@/components/AppHeader';
+import ErrorBanner from '@/components/ErrorBanner';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useClickSound } from '@/hooks/useClickSound';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
-  Alert,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -25,6 +25,7 @@ export default function InscriptionScreen() {
   const [nom, setNom] = useState('');
   const [email, setEmail] = useState('');
   const [telephone, setTelephone] = useState('');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const bg = dark ? '#1A1F36' : '#F0F4F8';
   const cardBg = dark ? '#2A3047' : '#fff';
@@ -36,16 +37,17 @@ export default function InscriptionScreen() {
 
   const valider = () => {
     playClick();
+    setErrorMsg(null);
     if (nom.trim().length < 2) {
-      Alert.alert('Erreur', 'Le nom doit contenir au moins 2 caractères');
+      setErrorMsg('Le nom doit contenir au moins 2 caractères.');
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      Alert.alert('Erreur', 'Email invalide');
+      setErrorMsg('Adresse email invalide.');
       return;
     }
     if (telephone.length < 8) {
-      Alert.alert('Erreur', 'Numéro de téléphone invalide');
+      setErrorMsg('Numéro de téléphone invalide (min 8 chiffres).');
       return;
     }
     router.push({
@@ -115,6 +117,8 @@ export default function InscriptionScreen() {
               placeholderTextColor={dark ? '#7A82A0' : '#999'}
               keyboardType="phone-pad"
             />
+
+            <ErrorBanner message={errorMsg} type="error" />
           </View>
 
           <Pressable

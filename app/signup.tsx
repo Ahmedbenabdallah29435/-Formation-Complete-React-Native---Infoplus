@@ -1,4 +1,5 @@
 import AppHeader from '@/components/AppHeader';
+import ErrorBanner from '@/components/ErrorBanner';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useClickSound } from '@/hooks/useClickSound';
 import { supabase } from '@/lib/supabase';
@@ -7,7 +8,6 @@ import { Link, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
-  Alert,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -29,6 +29,8 @@ export default function SignupScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
   const bg = dark ? '#1A1F36' : '#F0F4F8';
   const cardBg = dark ? '#2A3047' : '#fff';
@@ -40,12 +42,14 @@ export default function SignupScreen() {
 
   const handleSignup = async () => {
     playClick();
+    setErrorMsg(null);
+    setSuccessMsg(null);
     if (!EMAIL_REGEX.test(email)) {
-      Alert.alert('Erreur', 'Email invalide');
+      setErrorMsg('Adresse email invalide.');
       return;
     }
     if (password.length < 6) {
-      Alert.alert('Erreur', 'Le mot de passe doit avoir au moins 6 caractères');
+      setErrorMsg('Le mot de passe doit avoir au moins 6 caractères.');
       return;
     }
     setLoading(true);
@@ -53,10 +57,14 @@ export default function SignupScreen() {
     setLoading(false);
 
     if (error) {
-      Alert.alert('Inscription échouée', error.message);
+      setErrorMsg(
+        error.message.includes('already registered')
+          ? 'Cet email est déjà utilisé.'
+          : error.message
+      );
     } else {
-      Alert.alert('Bienvenue ! 🎉', 'Compte créé avec succès');
-      router.replace('/(tabs)');
+      setSuccessMsg('Compte créé avec succès ! 🎉 Redirection...');
+      setTimeout(() => router.replace('/(tabs)'), 800);
     }
   };
 
@@ -102,6 +110,9 @@ export default function SignupScreen() {
               placeholderTextColor={dark ? '#7A82A0' : '#999'}
               secureTextEntry
             />
+
+            <ErrorBanner message={errorMsg} type="error" />
+            <ErrorBanner message={successMsg} type="success" />
           </View>
 
           <Pressable

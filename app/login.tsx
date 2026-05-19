@@ -1,4 +1,5 @@
 import AppHeader from '@/components/AppHeader';
+import ErrorBanner from '@/components/ErrorBanner';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useClickSound } from '@/hooks/useClickSound';
 import { supabase } from '@/lib/supabase';
@@ -7,7 +8,6 @@ import { Link, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
-  Alert,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -29,6 +29,8 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
   const bg = dark ? '#1A1F36' : '#F0F4F8';
   const cardBg = dark ? '#2A3047' : '#fff';
@@ -40,12 +42,14 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     playClick();
+    setErrorMsg(null);
+    setSuccessMsg(null);
     if (!email || !password) {
-      Alert.alert('Erreur', 'Remplis tous les champs');
+      setErrorMsg('Remplis tous les champs.');
       return;
     }
     if (!EMAIL_REGEX.test(email)) {
-      Alert.alert('Erreur', 'Email invalide');
+      setErrorMsg('Adresse email invalide.');
       return;
     }
     setLoading(true);
@@ -53,7 +57,11 @@ export default function LoginScreen() {
     setLoading(false);
 
     if (error) {
-      Alert.alert('Login échoué', error.message);
+      setErrorMsg(
+        error.message.includes('Invalid login credentials')
+          ? 'Email ou mot de passe incorrect.'
+          : error.message
+      );
     } else {
       router.replace('/(tabs)');
     }
@@ -61,15 +69,17 @@ export default function LoginScreen() {
 
   const handleForgotPassword = async () => {
     playClick();
+    setErrorMsg(null);
+    setSuccessMsg(null);
     if (!EMAIL_REGEX.test(email)) {
-      Alert.alert('Email requis', 'Saisis ton email pour recevoir le lien de réinitialisation.');
+      setErrorMsg('Saisis ton email pour recevoir le lien de réinitialisation.');
       return;
     }
     const { error } = await supabase.auth.resetPasswordForEmail(email);
     if (error) {
-      Alert.alert('Erreur', error.message);
+      setErrorMsg(error.message);
     } else {
-      Alert.alert('Email envoyé', 'Vérifie ta boîte mail pour réinitialiser ton mot de passe.');
+      setSuccessMsg('Email de réinitialisation envoyé ! Vérifie ta boîte mail.');
     }
   };
 
@@ -119,6 +129,9 @@ export default function LoginScreen() {
             <Pressable onPress={handleForgotPassword} hitSlop={6} style={styles.forgotWrap}>
               <Text style={[styles.forgotText, { color: titleColor }]}>Mot de passe oublié ?</Text>
             </Pressable>
+
+            <ErrorBanner message={errorMsg} type="error" />
+            <ErrorBanner message={successMsg} type="success" />
           </View>
 
           <Pressable
