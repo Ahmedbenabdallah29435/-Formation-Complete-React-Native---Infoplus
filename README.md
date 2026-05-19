@@ -2,7 +2,7 @@
 
 ## 👨‍🏫 Contexte pédagogique
 
-> Ce dépôt est maintenu par **Ahmed Ben Salah**, dans le cadre d'une **mission d'enseignement** au centre **InfoPlus Bizerte**.
+> Ce dépôt est maintenu par **Ahmed Ben Abdallah**, dans le cadre d'une **mission d'enseignement** au centre **InfoPlus Bizerte**.
 >
 > J'encadre les étudiants dans leur apprentissage de **React Native + Expo** à travers une série d'ateliers progressifs. Le contenu de ce repo représente **les corrections officielles des ateliers** que je prépare pour mes étudiants — chaque branche correspond à un atelier (voir section [Branches Git](#-branches-git)).
 >
@@ -222,7 +222,7 @@ git checkout Atelier-3-bonus
 
 ## 👤 Auteur
 
-**Ahmed Ben Salah** — Enseignant React Native chez InfoPlus Bizerte.
+**Ahmed Ben Abdallah** — Enseignant React Native chez InfoPlus Bizerte.
 
 Ce dépôt sert de **support pédagogique** : il regroupe les corrections officielles des ateliers utilisés en cours. Les étudiants sont invités à essayer chaque atelier par eux-mêmes avant de consulter la correction sur la branche correspondante.
 
