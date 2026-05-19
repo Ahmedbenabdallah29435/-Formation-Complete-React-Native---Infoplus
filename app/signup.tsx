@@ -1,5 +1,6 @@
 import AppHeader from '@/components/AppHeader';
 import ErrorBanner from '@/components/ErrorBanner';
+import NotificationModal from '@/components/NotificationModal';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useClickSound } from '@/hooks/useClickSound';
 import { supabase } from '@/lib/supabase';
@@ -31,6 +32,7 @@ export default function SignupScreen() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const bg = dark ? '#1A1F36' : '#F0F4F8';
   const cardBg = dark ? '#2A3047' : '#fff';
@@ -53,7 +55,7 @@ export default function SignupScreen() {
       return;
     }
     setLoading(true);
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({ email, password });
     setLoading(false);
 
     if (error) {
@@ -62,10 +64,22 @@ export default function SignupScreen() {
           ? 'Cet email est déjà utilisé.'
           : error.message
       );
+      return;
+    }
+
+    // If Supabase requires email confirmation, no session is returned yet.
+    // Show the "check your inbox" notification. Otherwise auto-redirect.
+    if (!data.session) {
+      setShowConfirmModal(true);
     } else {
       setSuccessMsg('Compte créé avec succès ! 🎉 Redirection...');
       setTimeout(() => router.replace('/(tabs)'), 800);
     }
+  };
+
+  const handleCloseConfirmModal = () => {
+    setShowConfirmModal(false);
+    router.replace('/login');
   };
 
   return (
@@ -134,6 +148,15 @@ export default function SignupScreen() {
           </Link>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <NotificationModal
+        visible={showConfirmModal}
+        emoji="📧"
+        title="Vérifie ta boîte mail"
+        message={`Un email de confirmation a été envoyé à ${email}. Clique sur le lien dans le mail pour activer ton compte, puis reviens te connecter.\n\nPense à vérifier le dossier spam.`}
+        buttonLabel="OK, j'ai compris"
+        onClose={handleCloseConfirmModal}
+      />
     </SafeAreaView>
   );
 }
