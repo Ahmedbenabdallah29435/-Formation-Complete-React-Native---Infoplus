@@ -1,10 +1,58 @@
 # 📱 InfoPlus App — Formation React Native
 
-Application mobile pour le centre de formation **InfoPlus Bizerte** (depuis 1995), construite avec **React Native + Expo** dans le cadre des ateliers du cours.
+## 👨‍🏫 Contexte pédagogique
+
+> Ce dépôt est maintenu par **Ahmed Ben Salah**, dans le cadre d'une **mission d'enseignement** au centre **InfoPlus Bizerte**.
+>
+> J'encadre les étudiants dans leur apprentissage de **React Native + Expo** à travers une série d'ateliers progressifs. Le contenu de ce repo représente **les corrections officielles des ateliers** que je prépare pour mes étudiants — chaque branche correspond à un atelier (voir section [Branches Git](#-branches-git)).
+>
+> Les étudiants travaillent sur leur propre fork et peuvent consulter ce repo (et ses branches) comme référence après avoir tenté l'exercice eux-mêmes.
+
+---
+
+## 📖 À propos du projet
+
+Application mobile pour le centre de formation **InfoPlus Bizerte** (depuis 1995), construite avec **React Native + Expo**.
 
 L'app couvre les fonctionnalités classiques d'une app de centre de formation :
 catalogue de formations, détails, inscription, profil utilisateur, mode sombre,
-animations d'entrée, onboarding, etc.
+animations d'entrée, onboarding, authentification Supabase, etc.
+
+---
+
+## 📸 Aperçu de l'application
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="docs/screenshots/Formation%20React%20Native.png" width="200" alt="Capture 1" /><br/>
+        <sub><b>🏠 Accueil</b><br/>Stats, témoignages, galerie</sub>
+      </td>
+      <td align="center">
+        <img src="docs/screenshots/Formation%20React%20Native%202.png" width="200" alt="Capture 2" /><br/>
+        <sub><b>📚 Formations</b><br/>Liste + recherche + pull-to-refresh</sub>
+      </td>
+      <td align="center">
+        <img src="docs/screenshots/Formation%20React%20Native%203.png" width="200" alt="Capture 3" /><br/>
+        <sub><b>🎓 Détail</b><br/>Image hero + infos + CTA</sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="docs/screenshots/Formation%20React%20Native%204.png" width="200" alt="Capture 4" /><br/>
+        <sub><b>👤 Profil</b><br/>Auth Supabase + compétences + dark mode</sub>
+      </td>
+      <td align="center">
+        <img src="docs/screenshots/Formation%20React%20Native%205.png" width="200" alt="Capture 5" /><br/>
+        <sub><b>🔐 Login / Signup</b><br/>Supabase Auth + session persistante</sub>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+> 📁 Les captures d'écran sont stockées dans [`docs/screenshots/`](docs/screenshots/).
 
 ---
 
@@ -148,7 +196,7 @@ status bar et la nav bar système overlay le contenu. Les composants utilisent
 | `ATELIER-3` | Correction de l'atelier 3 (version de base) |
 | `ATELIER-3-Version-Final` | Atelier 3 — version finale propre |
 | `Atelier-3-bonus` | Atelier 3 + les 5 mini-défis bonus |
-| *Atelier 4* | *À créer — correction en cours* |
+| `Atelier-4` | Correction de l'atelier 4 (Supabase Auth + Context + bonus) |
 
 Pour consulter une correction :
 ```bash
@@ -159,7 +207,15 @@ git checkout Atelier-3-bonus
 
 ---
 
-## 🏫 Crédits
+## 👤 Auteur
+
+**Ahmed Ben Salah** — Enseignant React Native chez InfoPlus Bizerte.
+
+Ce dépôt sert de **support pédagogique** : il regroupe les corrections officielles des ateliers utilisés en cours. Les étudiants sont invités à essayer chaque atelier par eux-mêmes avant de consulter la correction sur la branche correspondante.
+
+---
+
+## 🏫 Le centre
 
 Centre de formation **InfoPlus Bizerte** — formations diplômantes BTP, BTS,
 Commerce, Infographie, Développement Web & Mobile depuis 1995.
