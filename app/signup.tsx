@@ -60,9 +60,7 @@ export default function SignupScreen() {
 
     if (error) {
       setErrorMsg(
-        error.message.includes('already registered')
-          ? 'Cet email est déjà utilisé.'
-          : error.message
+        error.message.includes('already registered') ? 'Cet email est déjà utilisé.' : error.message
       );
       return;
     }
@@ -83,7 +81,10 @@ export default function SignupScreen() {
   };
 
   return (
-    <SafeAreaView style={[styles.safe, { backgroundColor: bg }]} edges={['left', 'right', 'bottom']}>
+    <SafeAreaView
+      style={[styles.safe, { backgroundColor: bg }]}
+      edges={['left', 'right', 'bottom']}
+    >
       <StatusBar style="light" />
       <AppHeader title="Inscription" />
       <KeyboardAvoidingView
@@ -106,7 +107,10 @@ export default function SignupScreen() {
           <View style={[styles.card, { backgroundColor: cardBg }]}>
             <Text style={[styles.label, { color: textColor }]}>Email</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: inputBg, borderColor: inputBorder, color: textColor }]}
+              style={[
+                styles.input,
+                { backgroundColor: inputBg, borderColor: inputBorder, color: textColor },
+              ]}
               value={email}
               onChangeText={setEmail}
               placeholder="ton@email.com"
@@ -115,9 +119,14 @@ export default function SignupScreen() {
               autoCapitalize="none"
             />
 
-            <Text style={[styles.label, { color: textColor }]}>Mot de passe (min 6 caractères)</Text>
+            <Text style={[styles.label, { color: textColor }]}>
+              Mot de passe (min 6 caractères)
+            </Text>
             <TextInput
-              style={[styles.input, { backgroundColor: inputBg, borderColor: inputBorder, color: textColor }]}
+              style={[
+                styles.input,
+                { backgroundColor: inputBg, borderColor: inputBorder, color: textColor },
+              ]}
               value={password}
               onChangeText={setPassword}
               placeholder="••••••••"
@@ -134,9 +143,7 @@ export default function SignupScreen() {
             onPress={handleSignup}
             disabled={loading}
           >
-            <Text style={styles.btnText}>
-              {loading ? 'Inscription...' : 'Créer mon compte'}
-            </Text>
+            <Text style={styles.btnText}>{loading ? 'Inscription...' : 'Créer mon compte'}</Text>
           </Pressable>
 
           <Link href="/login" asChild>
@@ -201,3 +208,13 @@ const styles = StyleSheet.create({
   link: { alignSelf: 'center', marginTop: 20, padding: 8 },
   linkText: { fontSize: 14 },
 });
+
+// Supabase fournit un service d'authentification préconfiguré (basé sur GoTrue en interne). Quand tu fais :
+// tsconst { data, error } = await supabase.auth.signUp({ email, password });
+// Voilà ce qui se passe automatiquement côté Supabase, sans que tu écrives une seule ligne de backend :
+
+// Hashing du password avec bcrypt
+// Insertion dans la table auth.users (table système, gérée par Supabase)
+// Envoi de l'email de confirmation (si activé dans le dashboard)
+// Génération d'une session JWT (ou pas, si confirmation requise → c'est ton cas, d'où le !data.session)
+// Retour de l'objet user + session
